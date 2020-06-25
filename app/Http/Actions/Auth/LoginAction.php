@@ -14,6 +14,8 @@ class LoginAction
         /** @var User $user */
         $user = $request->user;
 
-        return $user->createToken('login');
+        return [
+            'token' => $user->createToken('login')->plainTextToken
+        ];
     }
 }

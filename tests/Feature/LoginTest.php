@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -47,5 +48,21 @@ class LoginTest extends TestCase
 
         // assert
         $response->assertJsonValidationErrors(['email']);
+    }
+
+    public function testSuccessfulLogin()
+    {
+        // setup
+        $user = factory(User::class)->create(['password' => Hash::make('1qa2ws3ed')]);
+
+        // run
+        $response = $this->post('/api/login', ['email' => $user->email, 'password' => '1qa2ws3ed']);
+
+        // assert
+        $response->assertOk();
+        $response->assertJsonMissingValidationErrors(['email', 'password']);
+        $response->assertJsonStructure(['token']);
+        $this->assertIsString($response->json()['token']);
+        $this->assertGreaterThan(0, strlen($response->json()['token']));
     }
 }
