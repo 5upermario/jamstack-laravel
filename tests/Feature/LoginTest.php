@@ -64,5 +64,8 @@ class LoginTest extends TestCase
         $response->assertJsonStructure(['token']);
         $this->assertIsString($response->json()['token']);
         $this->assertGreaterThan(0, strlen($response->json()['token']));
+        $response = $this->get('/api/check', ['Authorization' => 'Bearer ' . $response->json()['token']]);
+        $response->assertOk();
+        $response->assertExactJson(['success' => true]);
     }
 }
