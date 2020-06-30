@@ -48,6 +48,7 @@ class LoginTest extends TestCase
 
         // assert
         $response->assertJsonValidationErrors(['email']);
+        $response->assertJsonPath('errors.email.0', 'The provided credentials are incorrect.');
     }
 
     public function testSuccessfulLogin()
@@ -62,10 +63,8 @@ class LoginTest extends TestCase
         $response->assertOk();
         $response->assertJsonMissingValidationErrors(['email', 'password']);
         $response->assertJsonStructure(['token']);
-        $this->assertIsString($response->json()['token']);
-        $this->assertGreaterThan(0, strlen($response->json()['token']));
-        $response = $this->get('/api/check', ['Authorization' => 'Bearer ' . $response->json()['token']]);
-        $response->assertOk();
-        $response->assertExactJson(['success' => true]);
+        $this->assertIsString($response->json('token'));
+        $this->assertGreaterThan(0, strlen($response->json('token')));
+        $this->assertDatabaseHas('personal_access_tokens', ['tokenable_id' => $user->id]);
     }
 }

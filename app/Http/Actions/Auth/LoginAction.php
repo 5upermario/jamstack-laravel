@@ -12,7 +12,7 @@ class LoginAction
         $request->validated();
 
         /** @var User $user */
-        $user = $request->user;
+        $user = $request->input('user');
 
         return [
             'token' => $user->createToken('login')->plainTextToken
