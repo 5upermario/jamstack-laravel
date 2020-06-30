@@ -1,25 +1,32 @@
 {
-  "name": "jamstack-laravel",
-  "version": "1.0.0",
-  "description": "<p align=\"center\"><img src=\"https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg\" width=\"400\"></p>",
-  "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "test": "clear && php artisan test",
-    "watch": "npm-watch"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "npm-watch": "^0.6.0"
-  },
-  "watch": {
-    "test": {
-        "patterns": ["app", "config", "database", "routes", "tests"],
-        "extensions": "php"
+    "name": "jamstack-laravel",
+    "version": "1.0.0",
+    "description": "<p align=\"center\"><img src=\"https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg\" width=\"400\"></p>",
+    "main": "index.js",
+    "directories": {
+        "test": "tests"
+    },
+    "scripts": {
+        "test": "clear && printf '\\e[3J' && php artisan test",
+        "watch": "npm-watch",
+        "watch:test": "npm-watch test"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "npm-watch": "^0.6.0"
+    },
+    "watch": {
+        "test": {
+            "patterns": [
+                "app",
+                "config",
+                "database",
+                "routes",
+                "tests"
+            ],
+            "extensions": "php"
+        }
     }
-  }
 }
