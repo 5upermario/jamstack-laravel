@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/login', \App\Http\Actions\Auth\LoginAction::class);
+Route::middleware('auth:sanctum')->get('/logout', \App\Http\Actions\Auth\LogoutAction::class);
 
 Route::middleware('auth:sanctum')->get('/check', function () {
     return ['success' => true];
