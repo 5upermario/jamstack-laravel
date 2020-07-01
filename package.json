@@ -26,7 +26,8 @@
                 "routes",
                 "tests"
             ],
-            "extensions": "php"
+            "extensions": "php",
+            "quiet": true
         }
     }
 }

@@ -21,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/logout', \App\Http\Actions\Auth\LogoutA
 Route::middleware('auth:sanctum')->get('/check', function () {
     return ['success' => true];
 });
+
+Route::middleware('auth:sanctum')->post('/site', \App\Http\Actions\Site\CreateSiteAction::class);

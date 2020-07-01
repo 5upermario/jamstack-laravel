@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class RegistrationRequest extends ActionRequest
+class CreateSiteRequest extends ActionRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,7 @@ class RegistrationRequest extends ActionRequest
     public function rules()
     {
         return [
-            'email'    => 'required|email',
-            'password' => 'required|confirmed',
+            'name' => 'required|min:3',
         ];
     }
 }
