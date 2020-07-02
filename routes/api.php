@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', \App\Http\Actions\Auth\LoginAction::class);
 Route::post('/registration', \App\Http\Actions\Auth\RegistrationAction::class);
 
-Route::middleware('auth:sanctum')->get('/logout', \App\Http\Actions\Auth\LogoutAction::class);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/check', function () {
+        return ['success' => true];
+    });
 
-Route::middleware('auth:sanctum')->get('/check', function () {
-    return ['success' => true];
+    Route::get('/logout', \App\Http\Actions\Auth\LogoutAction::class);
+    Route::post('/site', \App\Http\Actions\Site\CreateSiteAction::class);
 });
-
-Route::middleware('auth:sanctum')->post('/site', \App\Http\Actions\Site\CreateSiteAction::class);
