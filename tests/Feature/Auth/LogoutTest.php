@@ -4,7 +4,6 @@ namespace Tests\Feature\Auth;
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class LogoutTest extends TestCase
@@ -14,8 +13,8 @@ class LogoutTest extends TestCase
     public function testSuccessfulLogout()
     {
         // setup
-        $user     = factory(User::class)->create(['password' => Hash::make('1qa2ws3ed')]);
-        $response = $this->post('/api/login', ['email' => $user->email, 'password' => '1qa2ws3ed']);
+        $user     = factory(User::class)->create();
+        $response = $this->post('/api/login', ['email' => $user->email, 'password' => 'password']);
         $token    = $response->json('token');
 
         // run
