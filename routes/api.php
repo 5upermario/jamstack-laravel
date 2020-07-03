@@ -29,5 +29,6 @@ Route::middleware('auth:sanctum')->group(function () {
         ->middleware(SiteOwnerMiddleware::class)
         ->group(function () {
             Route::delete('', \App\Http\Actions\Site\DeleteSiteAction::class);
+            Route::post('/name', \App\Http\Actions\Site\RenameSiteAction::class);
         });
 });
