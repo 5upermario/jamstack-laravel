@@ -23,4 +23,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/logout', \App\Http\Actions\Auth\LogoutAction::class);
     Route::post('/site', \App\Http\Actions\Site\CreateSiteAction::class);
+    Route::delete('/site/{id}', \App\Http\Actions\Site\DeleteSiteAction::class);
 });

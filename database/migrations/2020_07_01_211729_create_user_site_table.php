@@ -14,8 +14,10 @@ class CreateUserSiteTable extends Migration
     public function up()
     {
         Schema::create('user_site', function (Blueprint $table) {
-            $table->integer('user_id');
-            $table->integer('site_id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('site_id');
+            $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
             $table->string('role');
         });
     }

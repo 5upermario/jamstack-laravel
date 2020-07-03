@@ -2,8 +2,16 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int        $id
+ * @property string     $name
+ * @property string     $created_at
+ * @property string     $updated_at
+ * @property Collection $users
+ */
 class Site extends Model
 {
     /**
