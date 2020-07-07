@@ -19,6 +19,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string     $updated_at
  * @property Collection $sites
  * @property Collection $ownedSites
+ * @property Collection $ownedOrAdminSites
  */
 class User extends Authenticatable
 {
@@ -59,5 +60,10 @@ class User extends Authenticatable
     public function ownedSites()
     {
         return $this->belongsToMany('App\Site', 'user_site')->wherePivot('role', 'owner');
+    }
+
+    public function ownedOrAdminSites()
+    {
+        return $this->belongsToMany('App\Site', 'user_site')->wherePivotIn('role', ['owner', 'admin']);
     }
 }

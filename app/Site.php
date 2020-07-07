@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string     $created_at
  * @property string     $updated_at
  * @property Collection $users
+ * @property Collection $types
  */
 class Site extends Model
 {
@@ -26,5 +27,10 @@ class Site extends Model
     public function users()
     {
         return $this->belongsToMany('App\User', 'user_role');
+    }
+
+    public function types()
+    {
+        return $this->hasMany('App\SiteType');
     }
 }
