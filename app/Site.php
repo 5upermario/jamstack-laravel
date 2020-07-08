@@ -26,7 +26,7 @@ class Site extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User', 'user_role');
+        return $this->belongsToMany('App\User', 'user_site');
     }
 
     public function types()

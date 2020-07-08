@@ -36,6 +36,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/site/{id}')
         ->middleware(SiteOwnerAdminMiddleware::class)
         ->group(function () {
+            Route::post('/user', \App\Http\Actions\Site\AssignUserAction::class);
+
             Route::post('/type', \App\Http\Actions\SiteType\CreateSiteTypeAction::class);
         });
 });
