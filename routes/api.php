@@ -37,6 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
         ->middleware(SiteOwnerAdminMiddleware::class)
         ->group(function () {
             Route::post('/user', \App\Http\Actions\Site\AssignUserAction::class);
+            Route::delete('/user/{user_id}', \App\Http\Actions\Site\RemoveUserAction::class);
 
             Route::post('/type', \App\Http\Actions\SiteType\CreateSiteTypeAction::class);
         });
