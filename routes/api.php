@@ -24,6 +24,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/logout', \App\Http\Actions\Auth\LogoutAction::class);
     Route::post('/site', \App\Http\Actions\Site\CreateSiteAction::class);
 
+    Route::get('/sites', \App\Http\Actions\Site\ListSitesAction::class);
+
     Route::prefix('/site/{id}')
         ->middleware(App\Http\Middleware\SiteOwnerMiddleware::class)
         ->group(function () {

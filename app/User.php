@@ -58,7 +58,7 @@ class User extends Authenticatable
 
     public function sites()
     {
-        return $this->belongsToMany('App\Site', 'user_site');
+        return $this->belongsToMany('App\Site', 'user_site')->as('user')->withPivot('role');
     }
 
     public function ownedSites()

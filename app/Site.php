@@ -15,22 +15,29 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Site extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name'
     ];
 
     public function users()
     {
-        return $this->belongsToMany('App\User', 'user_site')->withPivot('role');
+        return $this->belongsToMany('App\User', 'user_site')->as('site')->withPivot('role');
     }
 
     public function types()
     {
         return $this->hasMany('App\SiteType');
+    }
+
+    public function jsonSerialize()
+    {
+        $data = $this->toArray();
+
+        if (!empty($data['user'])) {
+            $data['role'] = $data['user']['role'];
+            unset($data['user']);
+        }
+
+        return $data;
     }
 }

@@ -17,7 +17,7 @@ class ChangeOwnerAction
         /** @var User $admin */
         $admin = $site->users()->find($user_id);
 
-        if ($admin && $admin->pivot->role == User::SITE_ROLE_ADMIN) {
+        if ($admin && $admin->site->role == User::SITE_ROLE_ADMIN) {
             $site->users()->updateExistingPivot(Auth::user()->id, ['role' => User::SITE_ROLE_ADMIN]);
             $site->users()->updateExistingPivot($admin->id, ['role' => User::SITE_ROLE_OWNER]);
         }
