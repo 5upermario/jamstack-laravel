@@ -25,6 +25,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+    const SITE_ROLE_OWNER   = 'owner';
+    const SITE_ROLE_ADMIN   = 'admin';
+    const SITE_ROLE_CREATOR = 'creator';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -59,11 +63,20 @@ class User extends Authenticatable
 
     public function ownedSites()
     {
-        return $this->belongsToMany('App\Site', 'user_site')->wherePivot('role', 'owner');
+        return $this->belongsToMany('App\Site', 'user_site')->wherePivot('role', self::SITE_ROLE_OWNER);
     }
 
     public function ownedOrAdminSites()
     {
-        return $this->belongsToMany('App\Site', 'user_site')->wherePivotIn('role', ['owner', 'admin']);
+        return $this->belongsToMany('App\Site', 'user_site')->wherePivotIn('role', [self::SITE_ROLE_OWNER, self::SITE_ROLE_ADMIN]);
+    }
+
+    public static function getRole(string $role): string
+    {
+        $result = self::SITE_ROLE_CREATOR;
+
+        if ($role == self::SITE_ROLE_ADMIN) $result = $role;
+
+        return $result;
     }
 }

@@ -14,17 +14,8 @@ class AssignUserAction
         $user = User::where('email', $request->input('email'))->first();
         /** @var Site $site */
         $site = Site::find($id);
-        $site->users()->attach($user->id, ['role' => $this->getRole($request->input('role'))]);
+        $site->users()->attach($user->id, ['role' => User::getRole($request->input('role'))]);
 
         return ['success' => true];
-    }
-
-    private function getRole($role)
-    {
-        $result = 'creator';
-
-        if ($role == 'admin') $result = $role;
-
-        return $result;
     }
 }

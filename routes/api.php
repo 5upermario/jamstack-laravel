@@ -39,6 +39,8 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::post('/user', \App\Http\Actions\Site\AssignUserAction::class);
             Route::delete('/user/{user_id}', \App\Http\Actions\Site\RemoveUserAction::class);
 
+            Route::get('/user/{user_id}/role/{role}', \App\Http\Actions\Site\ChangeUserRoleAction::class);
+
             Route::post('/type', \App\Http\Actions\SiteType\CreateSiteTypeAction::class);
         });
 });
