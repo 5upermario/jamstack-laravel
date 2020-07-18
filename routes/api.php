@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Middleware\SiteOwnerAdminMiddleware;
-use App\Http\Middleware\SiteOwnerMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,14 +25,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/site', \App\Http\Actions\Site\CreateSiteAction::class);
 
     Route::prefix('/site/{id}')
-        ->middleware(SiteOwnerMiddleware::class)
+        ->middleware(App\Http\Middleware\SiteOwnerMiddleware::class)
         ->group(function () {
             Route::delete('', \App\Http\Actions\Site\DeleteSiteAction::class);
             Route::post('/name', \App\Http\Actions\Site\RenameSiteAction::class);
+
+            Route::get('/user/{user_id}/owner', \App\Http\Actions\Site\ChangeOwnerAction::class);
         });
 
     Route::prefix('/site/{id}')
-        ->middleware(SiteOwnerAdminMiddleware::class)
+        ->middleware(App\Http\Middleware\SiteOwnerAdminMiddleware::class)
         ->group(function () {
             Route::post('/user', \App\Http\Actions\Site\AssignUserAction::class);
             Route::delete('/user/{user_id}', \App\Http\Actions\Site\RemoveUserAction::class);
